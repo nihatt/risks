@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import Lottie from 'lottie-react-native';
+import { useNavigation } from '@react-navigation/native';
 export default function Card(props) {
+  const navigation = useNavigation();
     const toggleAnimation=(degree)=>{
         if(degree<=3 ){
             return require('../assets/okey.json')
@@ -13,7 +15,7 @@ export default function Card(props) {
             return require('../assets/alert.json')
         }else{
             console.log("girenzi")
-            return require('../assets/danger.json')
+            return require('../assets/error3.json')
         }
     }
     const toggleColor = (probability) => {
@@ -27,6 +29,7 @@ export default function Card(props) {
         }
     }
   return (
+    <TouchableOpacity onPress={()=>navigation.navigate("Details",{title:props.title,detail:props.description,degree:props.riskDegree})}>
     <View style={{height:responsiveHeight(10),flexDirection:'row',justifyContent:'space-between',borderRadius:20,overflow:'hidden',marginHorizontal:10,marginTop:20,borderWidth:1,backgroundColor:toggleColor(props.probability)}}>
       <View style={{width:responsiveWidth(20)}}>
       <Lottie source={toggleAnimation(props.riskDegree)} autoPlay  />
@@ -40,6 +43,7 @@ export default function Card(props) {
 
       </View>
     </View>
+    </TouchableOpacity>
   );
 }
 

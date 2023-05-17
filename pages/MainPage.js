@@ -56,7 +56,8 @@ export default function MainPage() {
       problemDetail: problemDetail,
       problemTitle: problemTitle,
       riskDegree: value,
-      riskProbability: value1
+      riskProbability: value1,
+      id:uniqueId
     }).then(() => { setModalVisible3(false), Alert.alert("Kayıt Başarıyla Eklendi"), getData() })
       .catch(e => Alert.alert("Hata", e))
   }
