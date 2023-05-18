@@ -6,6 +6,7 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 import Lottie from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
 export default function Card(props) {
+  console.log(props.id +"deneme")
   const navigation = useNavigation();
     const toggleAnimation=(degree)=>{
         if(degree<=3 ){
@@ -29,7 +30,7 @@ export default function Card(props) {
         }
     }
   return (
-    <TouchableOpacity onPress={()=>navigation.navigate("Details",{title:props.title,detail:props.description,degree:props.riskDegree})}>
+    <TouchableOpacity onPress={()=>navigation.navigate("Details",{title:props.title,detail:props.description,degree:props.riskDegree,id:props.id,action1:props.action1})}>
     <View style={{height:responsiveHeight(10),flexDirection:'row',justifyContent:'space-between',borderRadius:20,overflow:'hidden',marginHorizontal:10,marginTop:20,borderWidth:1,backgroundColor:toggleColor(props.probability)}}>
       <View style={{width:responsiveWidth(20)}}>
       <Lottie source={toggleAnimation(props.riskDegree)} autoPlay  />

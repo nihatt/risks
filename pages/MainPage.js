@@ -108,7 +108,7 @@ export default function MainPage() {
   };
   return (
     <ImageBackground blurRadius={0} source={require('../assets/bgg.jpg')} resizeMode="cover" >
-      <View style={{ paddingTop: StatusBar.currentHeight }}>
+      <View style={{  }}>
 
         <View style={{}}>
 
@@ -253,10 +253,10 @@ export default function MainPage() {
 
         </View>
 
-        <View style={{ height: responsiveHeight(80), borderTopLeftRadius: 30, borderTopRightRadius: 30 }}>
+        <View style={{ height: responsiveHeight(80), borderTopLeftRadius: 30, borderTopRightRadius: 30,paddingBottom:StatusBar.currentHeight }}>
           {spinner ? <Lottie source={require('../assets/loading.json')} autoPlay loop /> : <FlatList
             data={data}
-            renderItem={({ item }) => <Card probability={item.riskProbability} riskDegree={item.riskDegree} title={item.problemTitle} description={item.problemDetail}></Card>}
+            renderItem={({ item }) => <Card action1={item.actionDetail} id={item.id} probability={item.riskProbability} riskDegree={item.riskDegree} title={item.problemTitle} description={item.problemDetail}></Card>}
             keyExtractor={item => item.id}
           />}
         </View>

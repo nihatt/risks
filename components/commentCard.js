@@ -6,15 +6,16 @@ import {
     responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
-export default function CommentCard() {
+export default function CommentCard(props) {
+    console.log(props.username)
 
     return (
-        <View style={{ overflow: 'hidden', borderWidth: 1, height: responsiveHeight(10), borderRadius: 30, flexDirection: 'row', width: responsiveWidth(80) }}>
+        <View style={{ overflow: 'hidden', borderWidth: 1, height: responsiveHeight(10), borderRadius: 30, flexDirection: 'row', width: responsiveWidth(80),marginBottom:15 }}>
             <View style={{ borderWidth: 1, width: responsiveWidth(15), height: responsiveHeight(10), alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 30, fontFamily: 'Roboto-BoldItalic' }}>N</Text>
+                <Text style={{ fontSize: 30, fontFamily: 'Roboto-BoldItalic' }}>{props.username? props.username?.toUpperCase()[0] : 0}</Text>
             </View>
             <ScrollView style={{ width: responsiveWidth(60), height: responsiveHeight(10) }}>
-                <Text style={{ textAlign: 'center', margin: 5 }}>asdsadasdasdasdasdasdasdasdasdasdadasdasasdsadasdasdasdasdasdasdasdasdasdadasdasasdsadasdasdasdasdasdasdasdasdasdadasdasasdsadasdasdasdasdasdasdasdasdasdadasdas</Text>
+                <Text style={{ textAlign: 'left', margin: 5 }}>{props.comment}</Text>
             </ScrollView>
 
         </View>
