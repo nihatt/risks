@@ -30,22 +30,31 @@ export default function DetailsPage({ route, navigation }) {
   const user = auth.currentUser;
   const isFocused = useIsFocused();
   const [spinner, setSpinner] = useState(false);
-  let username= "nihat"
+  const username= "emin"
   const getData = async () => {
+    console.log("xxxxxx" + id)
     setSpinner(true);
     const records = collection(db, 'comments')
     const workoutSnapshot = await getDocs(records)
     const commentsData = workoutSnapshot.docs.map(doc => doc.data())
 
 
-    console.log(commentsData)
-    let newComments = commentsData.filter(e=>{e.problemId==id})
+    console.log(commentsData[0].problemId)
+    let newComments=[] ;
+    for(var i =0;i<commentsData.length;i++){
+      if(commentsData[i].problemId==id){
+        newComments.push(commentsData[i])
+      }
+    }
+
+    console.log(newComments.length)
     var newArray = [ { comment: action1,username : username},...newComments ];
+
 
   
     setData(newArray);
     setSpinner(false);
-    console.log(data)
+   
   }
   useEffect(() => {
     getData()
@@ -60,8 +69,8 @@ export default function DetailsPage({ route, navigation }) {
       problemId: id,
       userId: user.uid,
       userName: user.email
-    }).then(() => { setModalVisible3(false), Alert.alert("Kayıt Başarıyla Eklendi"), getData(),setComment("") })
-      .catch(e => Alert.alert("Hata", e))
+    }).then(() => {getData(), Alert.alert("Kayıt Başarıyla Eklendi"), setComment("") })
+      .catch(e => Alert.alert("Hata",e.message))
   }
 
 
@@ -84,7 +93,7 @@ export default function DetailsPage({ route, navigation }) {
         {spinner ? <Lottie source={require('../assets/loading.json')} autoPlay loop /> : <FlatList
             data={data}
             renderItem={({ item }) => <CommentCard comment={item.comment} username={item.userName}></CommentCard>}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.actionDeatil}
           />}
         </View>
       </View>
@@ -98,7 +107,7 @@ export default function DetailsPage({ route, navigation }) {
               containerStyle={{ backgroundColor: 'white', width: responsiveWidth(75) }}
               style={{ height: 30, backgroundColor: 'white' }}
               value={comment}
-              onChangeText={(value) => setComment(value)}
+              onChangeText={(comment) => setComment(comment)}
               placeholder='Yorum Öner' />
               <TouchableOpacity onPress={()=>addComment()}>
             <View style={{ height: 50, backgroundColor: 'white', width: responsiveWidth(25), alignSelf: 'center', justifyContent: 'center' }}>

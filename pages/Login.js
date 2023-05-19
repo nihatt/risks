@@ -28,7 +28,7 @@ export default function LoginPage({navigation}) {
             .catch(function (error) {
 
                 Alert.alert("Hatalı Bilgi", "Bilgilerinizden birisi veya hepsi hatalı")
-                navigation.navigate("MainTab")
+           
                 setIsLoading(false)
                 return error
             });

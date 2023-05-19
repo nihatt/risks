@@ -7,7 +7,6 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 export default function CommentCard(props) {
-    console.log(props.username)
 
     return (
         <View style={{ overflow: 'hidden', borderWidth: 1, height: responsiveHeight(10), borderRadius: 30, flexDirection: 'row', width: responsiveWidth(80),marginBottom:15 }}>
