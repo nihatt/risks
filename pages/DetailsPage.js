@@ -17,9 +17,10 @@ import InputComp from '../components/input';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from '../FireBase/firebaseConfig.js';
-import { addDoc, collection, getDocs } from 'firebase/firestore/lite';
+import { addDoc, collection, getDocs ,deleteDoc} from 'firebase/firestore/lite';
 import { doc, setDoc } from "firebase/firestore/lite";
 import Lottie from 'lottie-react-native';
+import { Button, ButtonGroup } from '@rneui/base';
 export default function DetailsPage({ route, navigation }) {
   const { title, detail, degree, id,action1 } = route.params;
 
@@ -60,6 +61,12 @@ export default function DetailsPage({ route, navigation }) {
     getData()
   }, [])
 
+  const handleDelete = async (idToDelete) => {
+  
+    await deleteDoc(doc(db, "record", idToDelete.toString())).then(() => { navigation.goBack(),Alert.alert("Kayıt Başarıyla Silindi"), getData() })
+        .catch(e => Alert.alert("Hata", e))
+}
+
   const addComment = async () => {
 
 
@@ -84,6 +91,7 @@ export default function DetailsPage({ route, navigation }) {
             <Text style={{ fontFamily: 'Inter-Bold', fontSize: 18 }}>SORUN :  {title}</Text>
             <Text numberOfLines={3} style={{ fontFamily: 'Roboto-Medium' }}>Detay : {detail}</Text>
           </View>
+       
         </View>
       </ImageBackground>
 
@@ -96,6 +104,7 @@ export default function DetailsPage({ route, navigation }) {
             keyExtractor={item => item.actionDeatil}
           />}
         </View>
+        <Button onPress={()=>handleDelete(id)}  containerStyle={{borderRadius:20,marginTop:20}} >Kaydı Sil</Button>
       </View>
 
 

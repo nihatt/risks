@@ -30,7 +30,9 @@ export default function Card(props) {
         }
     }
   return (
+    
     <TouchableOpacity onPress={()=>navigation.navigate("Details",{title:props.title,detail:props.description,degree:props.riskDegree,id:props.id,action1:props.action1})}>
+    
     <View style={{height:responsiveHeight(10),flexDirection:'row',justifyContent:'space-between',borderRadius:20,overflow:'hidden',marginHorizontal:10,marginTop:20,borderWidth:1,backgroundColor:toggleColor(props.probability)}}>
       <View style={{width:responsiveWidth(20)}}>
       <Lottie source={toggleAnimation(props.riskDegree)} autoPlay  />
@@ -41,7 +43,12 @@ export default function Card(props) {
       </View>
       <View style={{justifyContent:'center',paddingHorizontal:responsiveWidth(5),width:responsiveWidth(55)}}>
         <Text style={{fontSize:16}}>%{props.probability}</Text>
-
+ 
+      </View>
+      <View style={{justifyContent:'center',paddingHorizontal:responsiveWidth(5),width:responsiveWidth(55)}}>
+        <Text style={{fontSize:16}}>%{props.probability}</Text>
+        <Text style={{fontSize:16}}>%{props.probability}</Text>
+ 
       </View>
     </View>
     </TouchableOpacity>
